@@ -9,5 +9,5 @@ export const SITE = {
   blogPage: "",
   twitterId: "ahxinin",
   githubId: "ahxinin",
-  repo: "ahxinin/weekly",
+  repo: "ahxinin/weekly", // 确保这是你的正确仓库名
 };
