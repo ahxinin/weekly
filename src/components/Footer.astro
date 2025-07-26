@@ -33,6 +33,15 @@ import ThemeSwitch from "./ThemeSwitch.astro";
     Array.from(document.links).forEach((link) => {
       if (link.hostname !== window.location.hostname) {
         link.target = "_blank";
+        // 跟踪外部链接点击
+        link.addEventListener('click', () => {
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'click_external_link', {
+              'link_url': link.href,
+              'link_text': link.textContent
+            });
+          }
+        });
       }
     });
 
@@ -49,7 +58,7 @@ import ThemeSwitch from "./ThemeSwitch.astro";
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script
   async
-  src="https://www.googletagmanager.com/gtag/js?id=G-DT01FBW30E"
+  src="https://www.googletagmanager.com/gtag/js?id=G-Q3HX0EYJV5"
   is:inline></script>
 <script>
   // @ts-nocheck
@@ -58,5 +67,5 @@ import ThemeSwitch from "./ThemeSwitch.astro";
     dataLayer.push(arguments);
   }
   gtag("js", new Date());
-  gtag("config", "G-DT01FBW30E");
+  gtag("config", "G-Q3HX0EYJV5");
 </script>
