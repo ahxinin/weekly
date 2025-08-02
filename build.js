@@ -2,10 +2,18 @@ import { promises as fs } from 'fs';
 import axios from 'axios';
 
 async function fetchCiTime(filePath) {
-  const url = `https://api.github.com/repos/tw93/weekly/commits?path=${filePath}&page=1&per_page=1`;
-  const response = await axios.get(url);
-  const ciTime = response.data[0].commit.committer.date.split('T')[0];
-  return ciTime;
+  try {
+    const url = `https://api.github.com/repos/tw93/weekly/commits?path=${filePath}&page=1&per_page=1`;
+    const response = await axios.get(url);
+    if (response.data && response.data[0] && response.data[0].commit) {
+      const ciTime = response.data[0].commit.committer.date.split('T')[0];
+      return ciTime;
+    }
+    return '未知';
+  } catch (error) {
+    console.warn(`Failed to fetch commit time for ${filePath}:`, error.message);
+    return '未知';
+  }
 }
 
 async function main() {
