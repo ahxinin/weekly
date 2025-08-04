@@ -38,7 +38,7 @@ async function main() {
     const oldTitle = name.split('.md')[0];
     const num = parseInt(oldTitle.split('-')[0]);
     const shortTitle = oldTitle.split('-')[1];
-    const url = `https://weekly.tw93.fun/posts/${oldTitle}`;
+    const url = `https://weekly.twocatty.xin/posts/${oldTitle}`;
     const title = `第 ${num} 期 - ${shortTitle}`;
 
     posts.push({ num, title: shortTitle, url });
