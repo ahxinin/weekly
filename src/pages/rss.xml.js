@@ -24,7 +24,11 @@ export async function GET() {
     title: SITE.title,
     description: SITE.description,
     site: `${SITE.homePage}/`,
-    customData: `<image><url>${SITE.icon}</url></image>`,
+    customData: `<image><url>${SITE.icon}</url></image>
+<follow_challenge>
+    <feedId>177962868546323456</feedId>
+    <userId>158819894089433088</userId>
+</follow_challenge>`,
     items: await Promise.all(
       posts.map(async (item) => {
         const [issueNumber, issueTitle] = item.url
