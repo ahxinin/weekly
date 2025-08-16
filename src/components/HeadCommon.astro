@@ -7,10 +7,29 @@ const { icon } = SITE;
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+<!-- Favicon and Icons -->
 <link rel="icon" href={icon} />
+<link rel="shortcut icon" href={icon} />
+<link rel="apple-touch-icon" href={icon} />
+
+<!-- Sitemap and RSS -->
 <link rel="sitemap" href="/sitemap.xml" />
+<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
+
+<!-- DNS Prefetch for Performance -->
+<link rel="dns-prefetch" href="//gw.alipayobjects.com" />
+<link rel="preconnect" href="https://gw.alipayobjects.com" crossorigin />
+
+<!-- Search Engine Verification (请替换为您的实际验证代码) -->
+<!-- <meta name="google-site-verification" content="您的Google验证代码" /> -->
+<!-- <meta name="msvalidate.01" content="您的Bing验证代码" /> -->
+<!-- <meta name="baidu-site-verification" content="您的百度验证代码" /> -->
+
+<!-- Web App Manifest -->
+<!-- <link rel="manifest" href="/manifest.json" /> -->
 
 <link
   rel="stylesheet"

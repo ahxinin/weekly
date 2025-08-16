@@ -63,10 +63,27 @@ function defaultLayoutPlugin() {
 }
 
 export default defineConfig({
+  site: 'https://weekly.twocatty.xin',
   prefetch: true,
   integrations: [tailwind()],
   markdown: {
     remarkPlugins: [defaultLayoutPlugin],
     rehypePlugins: [rehypeCustomizeImageSrc],
   },
+  compressHTML: true,
+  build: {
+    inlineStylesheets: 'auto'
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vendor': ['motion', 'lozad'],
+            'utils': ['dayjs', 'axios']
+          }
+        }
+      }
+    }
+  }
 });

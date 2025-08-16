@@ -1,0 +1,118 @@
+---
+import { SITE } from "@/config";
+
+export interface Props {
+  type: 'website' | 'article';
+  content?: any;
+  pageURL: URL | string;
+}
+
+const { type, content = {}, pageURL } = Astro.props;
+const {
+  title: contentTitle,
+  description: contentDescription,
+  image,
+  date
+} = content;
+
+const pageTitle = contentTitle ? `${SITE.title}${contentTitle}` : SITE.title;
+const description = contentDescription || SITE.description;
+const imageUrl = image || SITE.siteImage || `${SITE.homePage}/assets/logo.png`;
+
+// 网站结构化数据
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": SITE.title,
+  "description": SITE.description,
+  "url": SITE.homePage,
+  "author": {
+    "@type": "Person",
+    "name": SITE.author,
+    "sameAs": [
+      `https://twitter.com/${SITE.twitterId}`,
+      `https://github.com/${SITE.githubId}`
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": SITE.title,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${SITE.homePage}/assets/logo.png`
+    }
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": `${SITE.homePage}/?q={search_term_string}`
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
+
+// 文章结构化数据
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": pageTitle,
+  "description": description,
+  "image": imageUrl,
+  "url": pageURL,
+  "datePublished": date ? new Date(date.replace(/\//g, '-')).toISOString() : new Date().toISOString(),
+  "dateModified": date ? new Date(date.replace(/\//g, '-')).toISOString() : new Date().toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": SITE.author,
+    "sameAs": [
+      `https://twitter.com/${SITE.twitterId}`,
+      `https://github.com/${SITE.githubId}`
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": SITE.title,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${SITE.homePage}/assets/logo.png`
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": pageURL
+  },
+  "articleSection": "投资理财",
+  "keywords": SITE.keywords,
+  "inLanguage": "zh-CN"
+};
+
+// 面包屑导航结构化数据
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": SITE.homePage
+    }
+  ]
+};
+
+// 如果是文章页面，添加文章项到面包屑
+if (type === 'article' && contentTitle) {
+  breadcrumbSchema.itemListElement.push({
+    "@type": "ListItem",
+    "position": 2,
+    "name": contentTitle,
+    "item": pageURL
+  });
+}
+
+const schema = type === 'article' ? articleSchema : websiteSchema;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>

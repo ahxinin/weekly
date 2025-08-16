@@ -1,6 +1,7 @@
 ---
 import HeadCommon from "../components/HeadCommon.astro";
 import HeadSEO from "../components/HeadSEO.astro";
+import StructuredData from "../components/StructuredData.astro";
 import Card from "../components/Card.astro";
 import Header from "../components/Header/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -11,24 +12,28 @@ const posts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
 const allPosts = sortPosts(posts);
 ---
 
-<html lang="ch">
+<html lang="zh-CN">
   <head>
     <HeadCommon />
     <HeadSEO pageURL={SITE.homePage} content={{}} />
+    <StructuredData type="website" pageURL={SITE.homePage} />
     <title>{SITE.title}</title>
   </head>
 
   <body>
     <Header />
-    <div
-      class="mx-auto -mt-5 mb-12 xl:max-w-7xl w-full lg:max-w-5xl md:max-w-2xl max-w-xl md:box-border box-content md:px-0 sm:px-3 px-4"
-    >
-      <div
-        class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 mx-0 md:-mr-5 mr-0"
-      >
-        {allPosts.map((p) => <Card post={p} />)}
-      </div>
-    </div>
+    <main role="main">
+      <section class="mx-auto -mt-5 mb-12 xl:max-w-7xl w-full lg:max-w-5xl md:max-w-2xl max-w-xl md:box-border box-content md:px-0 sm:px-3 px-4">
+        <h1 class="sr-only">投资周刊 - 专业的投资分析和市场洞察</h1>
+        <div
+          class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 mx-0 md:-mr-5 mr-0"
+          role="list"
+          aria-label="投资周刊文章列表"
+        >
+          {allPosts.map((p) => <Card post={p} />)}
+        </div>
+      </section>
+    </main>
     <Footer />
   </body>
 </html>

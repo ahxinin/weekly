@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# 指向sitemap
+Sitemap: https://weekly.twocatty.xin/sitemap.xml
+
+# 允许抓取所有页面
+Disallow:
+
+# 允许抓取资源
+Allow: /assets/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.webp
+Allow: /*.svg
+
+# 优化爬虫行为
+Crawl-delay: 1

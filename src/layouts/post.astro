@@ -2,6 +2,7 @@
 import "../styles/heti.min.css";
 import HeadCommon from "../components/HeadCommon.astro";
 import HeadSEO from "../components/HeadSEO.astro";
+import StructuredData from "../components/StructuredData.astro";
 import Footer from "../components/Footer.astro";
 import AstroLogo from "../components/Header/AstroLogo.astro";
 import LeftSidebar from "../components/LeftSidebar.astro";
@@ -46,10 +47,11 @@ let prevUrl =
     : "";
 ---
 
-<html lang="ch">
+<html lang="zh-CN">
   <head>
     <HeadCommon />
     <HeadSEO content={content} pageURL={currentUrl} />
+    <StructuredData type="article" content={{ ...content, date }} pageURL={currentUrl} />
     <meta name="generator" content={Astro.generator} />
     <title>{SITE.title}{title}</title>
     <style>
@@ -199,19 +201,22 @@ let prevUrl =
           class="markdown-body heti md:mx-auto md:pb-20 pb-14 xl:max-w-7xl w-full lg:max-w-5xl md:max-w-2xl md:pl-3.5"
           id="write"
         >
-          <h1
-            class="content-title flex align-middle text-gray-800 dark:text-gray-200"
-          >
-            <a class="logo inline-block md:hidden visible" href="/"
-              ><AstroLogo size={40} />
-            </a>
-            <span data-pagefind-meta="title">{title}</span>
-            <Search />
-          </h1>
-          <slot />
+          <header>
+            <h1
+              class="content-title flex align-middle text-gray-800 dark:text-gray-200"
+            >
+              <a class="logo inline-block md:hidden visible" href="/" aria-label="返回首页"
+                ><AstroLogo size={40} />
+              </a>
+              <span data-pagefind-meta="title">{title}</span>
+              <Search />
+            </h1>
+          </header>
+          <article>
+            <slot />
+          </article>
           <hr />
-          <div
-            class="flex justify-between md:flex-row flex-col mt-2 post-footer"
+          <footer class="flex justify-between md:flex-row flex-col mt-2 post-footer"
           >
             <div class="text-gray-800 dark:text-gray-200 flex-1">
               发布日期：<a
@@ -247,7 +252,7 @@ let prevUrl =
                 | RSS</a
               >
             </div>
-          </div>
+          </footer>
         </div>
         <script
           is:inline
@@ -276,6 +281,24 @@ let prevUrl =
           if (index > 1) {
             img.setAttribute("loading", "lazy");
             img.setAttribute("decoding", "async");
+          }
+          // 添加alt属性如果缺失
+          if (!img.alt) {
+            img.alt = "投资周刊配图";
+          }
+          // 添加图片尺寸属性以避免布局偏移
+          if (!img.width && !img.height) {
+            img.setAttribute("width", "auto");
+            img.setAttribute("height", "auto");
+          }
+        });
+        
+        // 优化外部链接
+        const externalLinks = document.querySelectorAll('a[href^="http"]');
+        externalLinks.forEach(link => {
+          if (!link.hostname === window.location.hostname) {
+            link.setAttribute("rel", "noopener noreferrer");
+            link.setAttribute("target", "_blank");
           }
         });
       });

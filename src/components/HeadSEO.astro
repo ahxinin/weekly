@@ -30,20 +30,36 @@ const preloadImage = image
   : false;
 ---
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content={imageSrc} />
-<meta name="twitter:site" content={homePage} />
-<meta property="twitter:url" content={pageURL} />
-<meta name="twitter:creator" content={`@${twitterId}`} />
-<meta property="twitter:description" content={description} />
+<!-- Essential Meta Tags -->
+<meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
 <meta name="author" content={author} />
-<meta name="description" content={description} />
-<meta property="og:type" content="website" />
+<meta name="robots" content="index, follow" />
+<meta name="googlebot" content="index, follow" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={pageURL} />
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:type" content="article" />
 <meta property="og:title" content={pageTitle} />
-<meta property="og:image" content={icon} />
 <meta property="og:description" content={description} />
+<meta property="og:image" content={imageSrc} />
 <meta property="og:url" content={pageURL} />
-<meta property="og:site_name" content={pageTitle} />
+<meta property="og:site_name" content={SITE.title} />
+<meta property="og:locale" content="zh_CN" />
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={`@${twitterId}`} />
+<meta name="twitter:creator" content={`@${twitterId}`} />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageSrc} />
+
+<!-- Additional SEO Meta Tags -->
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="msapplication-TileColor" content="#ffffff" />
 
 {preloadImage && <link rel="preload" href={preloadImage} as="image" />}
