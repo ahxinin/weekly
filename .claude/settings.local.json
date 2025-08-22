@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git reset:*)",
+      "Bash(git commit:*)",
+      "Bash(git lfs:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
