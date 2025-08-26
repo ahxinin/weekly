@@ -6,7 +6,7 @@ export const SITE = {
   icon: "/assets/logo.png",
   siteImage: "https://weekly.twocatty.xin/assets/logo.png",
   homePage: "https://weekly.twocatty.xin",
-  blogPage: "",
+  blogPage: "https://blog.twocatty.xin/",
   twitterId: "ahxinin",
   githubId: "ahxinin",
   repo: "ahxinin/weekly", // 确保这是你的正确仓库名
