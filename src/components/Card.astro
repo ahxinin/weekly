@@ -25,10 +25,10 @@ const { image, description, date } = post.frontmatter;
       decoding="async"
     />
     <header
-      class='w-full flex justify-between items-center leading-tight pt-3 px-3'
+      class='w-full flex flex-col leading-tight pt-3 px-3'
     >
-      <h2 class='text-gray-800 dark:text-gray-200 font-semibold md:text-base text-lg flex-1 mr-3 overflow-hidden text-ellipsis whitespace-nowrap'>{title}</h2>
-      <time class='text-grey-darker text-gray-600 dark:text-gray-300 md:text-sm text-base flex-shrink-0' datetime={date}>
+      <h2 class='text-gray-800 dark:text-gray-200 font-semibold md:text-base text-lg mb-1'>{title}</h2>
+      <time class='text-grey-darker text-gray-600 dark:text-gray-300 md:text-sm text-base' datetime={date}>
         {date}
       </time>
     </header>
