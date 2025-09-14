@@ -27,10 +27,14 @@ const { image, description, date } = post.frontmatter;
     <header
       class='w-full flex flex-col leading-tight pt-3 px-3'
     >
-      <h2 class='text-gray-800 dark:text-gray-200 font-semibold md:text-base text-lg mb-1'>{title}</h2>
-      <time class='text-grey-darker text-gray-600 dark:text-gray-300 md:text-sm text-base' datetime={date}>
-        {date}
-      </time>
+      <div class='w-full flex justify-start mb-1'>
+        <h2 class='text-gray-800 dark:text-gray-200 font-semibold md:text-base text-lg'>{title}</h2>
+      </div>
+      <div class='w-full flex justify-end'>
+        <time class='text-grey-darker text-gray-600 dark:text-gray-300 md:text-sm text-base' datetime={date}>
+          {date}
+        </time>
+      </div>
     </header>
     <p
       class='text-gray-600 dark:text-gray-300 md:w-78 w-94 overflow-hidden pt-2 line-clamp-2 px-3 w-full md:h-12 h-14 md:text-sm text-base'
